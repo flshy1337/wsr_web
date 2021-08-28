@@ -3,6 +3,8 @@
 # Notice that it doesn't garantee you an idempotent behaviour after repetitive execution
 - name: Execute kickstart script
   hosts: all
+  become: yes
+  become_user: root
   gather_facts: false
   tasks:
     - name: Copy script
@@ -10,7 +12,36 @@
         src: ./kickstart.sh
         dest: /home/azadmin/kickstart.sh
         mode: u=rwx,g=r,o=r
-    - name: Run script
-      ansible.builtin.shell: /home/azadmin/kickstart.sh
+    - name: Copy requirements  
+      copy:
+        src: ./requirements.txt
+        dest: /home/azadmin/requirements.txt
+    - name: Copy folder with shells
+      copy:
+        src: ./shells/
+        dest: /home/azadmin
+        mode: '777'
+    - name: Copy folder with web
+      copy:
+        src: ./web/
+        dest: /home/azadmin
+        mode: '777'
+    - name: Install python3 and pip and redis-server
+      failed_when: false
+      apt:
+        name: 
+        - redis-server
+        - python3-pip
+        - python-pip
+        - python-setuptools
+        - ufw
+        update_cache: yes
+    - name: Install setuptools
+      pip:
+        name: setuptools
+    - name: Install requirements
+      shell: /home/azadmin/pipreq.sh
+    - name: Start web
+      shell: /home/azadmin/startweb.sh
 
 

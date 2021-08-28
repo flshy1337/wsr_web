@@ -1,0 +1,7 @@
+IP_address: 10.198.22.152
+Distribution: Ubuntu 18.04
+Kernel: 5.4.0-1055-azure
+vCPUs: 1
+RAM_MB: 917
+Boot_image: /boot/vmlinuz-5.4.0-1055-azure
+Python3: 2.7.17

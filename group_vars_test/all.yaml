@@ -1,0 +1,11 @@
+####  CONNECTION SPECIFIC ####
+ansible_connection: ssh
+ansible_become: no
+ansible_network_os: linux
+
+ansible_user: "{{ lookup('env','adminuser') }}"
+ansible_ssh_pass: "{{ lookup('env','password') }}"
+ansible_port: 22
+
+####  CONFIGURATION SPECIFIC ####
+

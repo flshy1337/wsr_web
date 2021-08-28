@@ -166,3 +166,4 @@ RAM_MB: 666
 Boot_image: /boot/vmlinus-torvalds-3.1.4-88-repack-by-canonical
 Python3: 3.2.28
 ```
+# wsr_web
